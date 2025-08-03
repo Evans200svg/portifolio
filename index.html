@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evanson Kimani - Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #0f0f0f, #1c1c1c);
+            color: #333;
+            scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .twinkle {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('https://i.ibb.co/7vV0Fyz/twinkle.gif') repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #1e1e2f;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+
+        .content {
+            margin-left: 230px;
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+            text-align: left;
+        }
+
+        .profile {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4CAF50;
+        }
+
+        .profile h1 {
+            margin: 10px 0 5px 0;
+            font-size: 60px;
+            font-weight: bold;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .career {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .career span {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            animation: colorChange 5s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { background-color: #4CAF50; }
+            25% { background-color: #2196F3; }
+            50% { background-color: #FF5722; }
+            75% { background-color: #9C27B0; }
+            100% { background-color: #4CAF50; }
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        #home { background: linear-gradient(to right, #00c6ff, #0072ff); }
+        #about { background: linear-gradient(to right, #f7971e, #ffd200); }
+        #services { background: linear-gradient(to right, #43cea2, #185a9d); }
+        #blog { background: linear-gradient(to right, #fc466b, #3f5efb); }
+        #projects { background: linear-gradient(to right, #00b09b, #96c93d); }
+        #contact { background: linear-gradient(to right, #f953c6, #b91d73); }
+        #hireme { background: linear-gradient(to right, #8e2de2, #4a00e0); }
+
+        h1, h2, h3 {
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px 0 0;
+        }
+
+        .icon {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .view-icon {
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e1e2f;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .hire-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 20px auto 0 auto;
+        }
+
+        .hire-form input, .hire-form textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .send-btn {
+            align-self: flex-end;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .send-btn span {
+            margin-left: 5px;
+        }
+
+        .send-btn:hover {
+            background-color: #45a049;
+        }
+
+    /* Marquee Animation */
+    .marquee-container {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+        background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+        /*background: black;*/
+        padding: 10px 0;
+        margin-top: 20px;
+    }
+
+    .name-container {
+        display: inline-block;
+        font-size: 24px;
+        font-weight: bold;
+        color:  white;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        animation: marquee 15s linear infinite;
+    }
+
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar.hidden {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .project-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar {
+                transform: translateX(0) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="twinkle"></div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <h2>Evanson KAHUHA</h2>
+            <ul>
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#services" onclick="closeMenu()">Services</a></li>
+                <li><a href="#blog" onclick="closeMenu()">Blog</a></li>
+                <li><a href="project.html" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                <li><a href="#hireme" onclick="closeMenu()">Hire Me</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="profile">
+             <img src="my-photo.jpg" alt="Evanson Kahuha">
+             <h1>EVANSON KAHUHA</h1>
+            </div>
+
+            <div class="marquee-container">
+               <div class="name-container">
+                  MACHINE LEARNING ENGINEER | AI ENTHUSIAST | ELECTRICAL ENGINEER
+               </div>
+            </div>
+
+            <section id="home">
+                <h1>Hi, I'm <strong>Evanson Kahuha</strong></h1>
+                <p>An electrical engineer, machine learning engineer, front-end web developer, and AI professional.</p>
+            </section>
+
+            <section id="about">
+                <h2>About Me</h2>
+                <p>I'm <strong>Evanson Kahuha</strong>, an <strong>electrical engineer</strong>, <strong>machine learning engineer</strong>, <strong>front-end web developer</strong>, and <strong>AI professional</strong>.</p>
+                <p>I have a passion for creating innovative solutions and leveraging technology to solve real-world problems.</p>
+                <p>With a background in electrical engineering and experience in software development, I bring a unique perspective to my work.</p>
+                <p>My goal is to combine my technical skills with my creativity to build impactful projects.</p>
+                <p>What drives me is my passion for continuous learning, mentoring others, and using technology to create solutions that improve lives.</p>
+                <p>Feel free to explore my portfolio and get in touch if you'd like to collaborate or learn more about my work.</p>
+                <p>Thank you for visiting my portfolio!</p>
+            </section>
+
+            <section id="services">
+                <h2>Services</h2>
+                <h3>Tech</h3>
+                <ul>
+                    <li>Creating front-end web pages</li>
+                    <li>Machine learning models</li>
+                    <li>AI model development</li>
+                </ul>
+                <h3>Engineering</h3>
+                <ul>
+                    <li>Solar and electrical installations</li>
+                    <li>Electronics creation and repair</li>
+                    <li>Electrical component modeling</li>
+                </ul>
+            </section>
+
+            <section id="blog">
+                <h2>My Experience</h2>
+                <p>2 years as a front-end web developer</p>
+                <p>2 years as an electrical engineer</p>
+                <p>1 year as a machine learning engineer</p>
+                <p>A passionate tech enthusiast.</p>
+                <div class="blog-actions">
+                    <a href="cv.pdf" download class="btn">Download CV</a>
+                    <a href="https://www.linkedin.com/in/evanson-kimani-2770b4331" target="_blank" class="icon">LinkedIn</a>
+                    <a href="https://github.com/Evans200png" target="_blank" class="icon">GitHub</a>
+                    <a href="tel:+254727402449" class="icon">Phone</a>
+                    <a href="#hireme" class="btn">Hire Me</a>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="project-list">
+                    <div class="project">
+                        <h3>Project 1</h3>
+                        <p>Description of completed project.</p>
+                        <a href="project.html" class="view-icon">🔍VIEW</a>
+                    </div>
+                    <div class="project">
+                        <h3>Project 2</h3>
+                        <p>Description of ongoing project.</p>
+                        <a href="project.html" class="view-icon">🔍VIEW</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact Me</h2>
+                <p><a href="https://www.linkedin.com/in/evanson-kimani-2770b4331" target="_blank">LinkedIn</a></p>
+                <p><a href="https://github.com/Evans200png" target="_blank">GitHub</a></p>
+                <p><a href="mailto:kimsymaggie0@gmail.com">kimsymaggie0@gmail.com</a></p>
+
+                <form class="hire-form" action="mailto:kimskahush10@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+                    <button type="submit" class="send-btn">Send <span>📧</span></button>
+                </form>
+            </section>
+
+            <section id="hireme">
+                <h2>Hire Me</h2>
+                <p>I'm skilled in front-end web development, machine learning, AI, solar and electrical installations, electronics repair, and electrical modeling.</p>
+                <a href="cv.pdf" download class="btn">Download CV 📥</a>
+                <a href="cv.pdf" target="_blank" class="btn">View CV 📄</a>
+
+                <h3>Get in Touch</h3>
+                <form class="hire-form" action="mailto:kimskahush10@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" rows="5" placeholder="Message......" required></textarea>
+                    <button type="submit" class="send-btn">Send <span>📧</span></button>
+                </form>
+            </section>
+
+            <footer>
+                <p>© 2025 Evanson Kahuha | <a href="https://ke.linkedin.com/in/evanson-kimani-2770b4331" target="_blank">LinkedIn</a> | <a href="https://github.com/Evans200png" target="_blank">GitHub</a> | Phone: +254727402449</p>
+            </footer>
+        </main>
+    </div>
+
+   <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebar').classList.toggle('hidden');
+        }
+
+        function closeMenu() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+                document.getElementById('sidebar').classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('hidden');
+                document.getElementById('sidebar').classList.add('active');
+            } else {
+                document.getElementById('sidebar').classList.add('hidden');
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        });
+
+        window.addEventListener('load', function () {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
